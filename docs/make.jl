@@ -20,4 +20,5 @@ makedocs(;
 
 deploydocs(;
     repo="github.com/endremborza/BigO.jl",
+    devbranch="main"
 )

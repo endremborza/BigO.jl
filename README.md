@@ -31,15 +31,10 @@ function _merge(a1::AbstractArray{T, 1}, a2::AbstractArray{T, 1}) where {T}
     out = Array{T,1}(undef, n)
     i, j = 1, 1
     while i + j <= n + 1
-        if i > n1
-            e = a2[j]; j += 1
-        elseif j > n2
-            e = a1[i]; i += 1
-        elseif a1[i] > a2[j]
-            e = a2[j]; j += 1
-        else
-            e = a1[i]; i += 1
-        end
+        if (i > n1) e = a2[j]; j += 1
+        elseif (j > n2) e = a1[i]; i += 1
+        elseif (a1[i] > a2[j]) e = a2[j]; j += 1
+        else e = a1[i]; i += 1 end
         out[i+j - 2 ] = e
     end
     return out

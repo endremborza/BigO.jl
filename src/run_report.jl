@@ -19,9 +19,9 @@ Creates profiles for functions of runtime and memory consumption for different i
 
 # Arguments
 
-- `funcarray::Array{Base.Callable}` or `func::Base.Callable`: the funtion(s) to profile
-- `genfunc::Base.Callable`: funtion that generates inputs of different sizes for
-the funtion(s)
+- `funcarray::Array{Base.Callable}` or `func::Base.Callable`: the function(s) to profile
+- `genfunc::Base.Callable`: function that generates inputs of different sizes for
+the function(s)
 - `insizes`: iterable of integers that are used as inputs for `genfunc`
 
 # Keywords

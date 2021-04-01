@@ -1,7 +1,7 @@
 using BigO
 using Test
 using Random
-
+using  RecipesBase
 
 
 @testset "BigO.jl" begin
@@ -10,7 +10,10 @@ using Random
 
     report = RunReport([sort, sort!], rand, 10:10:50, samples=3)
     @test report.names == ["sort", "sort!"]
-    report |> plot
+    rec = RecipesBase.apply_recipe(Dict{Symbol, Any}(), report)
+    @test rec[1].plotattributes[:title] == "Runtimes"
+    @test rec[1].plotattributes[:label] == ["sort" "sort!"]
+
 
     report1 = RunReport(sort, rand, 10:10:50, samples=3)
     @test report1.names == ["sort"]

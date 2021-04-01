@@ -64,12 +64,21 @@ function RunReport(
     return RunReport([func], genfunc, insizes, seconds=seconds, samples=samples)
 end
 
-function plot(report::RunReport)
-    labels = reshape(report.names, 1, size(report.names,1))
-    ps = [
-        plot(report.inputsizes, y, title=title) for (y, title) in
-        zip([report.times, report.gctimes, report.allocs, report.allocsizes],
-        ["Runtimes", "GC times", "Allocation counts", "Allocation sizes"])
-    ]
-    plot(ps..., layout = (2, 2), legend=:topleft, labels=labels, size=(800,600))
+
+@recipe function f(report::RunReport)
+    legend := :topleft
+    label := reshape(report.names, 1, size(report.names, 1))
+    layout := (2, 2)
+    size --> (800, 600)
+
+    for (i, (spy, sptitle)) in zip(
+            [report.times, report.gctimes, report.allocs, report.allocsizes],
+            ["Runtimes", "GC times", "Allocation counts", "Allocation sizes"]
+        ) |> enumerate
+        @series begin
+            subplot := i
+            title := sptitle
+            (report.inputsizes, spy)
+        end
+    end
 end

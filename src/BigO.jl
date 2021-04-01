@@ -1,12 +1,11 @@
 module BigO
 
 using BenchmarkTools
+using RecipesBase
 using Statistics
 using Zygote: gradient
 
-import Plots: plot
-
-export RunReport, plot
+export RunReport
 export bigos, guessbigo, best
 
 include("run_report.jl")

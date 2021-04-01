@@ -49,7 +49,7 @@ end
 
 
 report = RunReport([mergesort, lamesort!], randperm, 100:1000:10100, seconds=0.2; samples=200)
-bigos(report)
+report |> bigos
 ```
 
 > Dict{String,String} with 2 entries:
@@ -57,6 +57,7 @@ bigos(report)
 >  "lamesort!" => "O(n^p)" 
 
 ```julia
+using Plots
 report |> plot
 ```
 
